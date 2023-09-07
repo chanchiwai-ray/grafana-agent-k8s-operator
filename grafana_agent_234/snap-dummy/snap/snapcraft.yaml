@@ -1,0 +1,29 @@
+name: dummy-snap
+version: '0.1'
+base: core22
+summary: dummy
+description: |
+  dummy
+grade: stable
+confinement: strict
+
+parts:
+
+  logs:
+    plugin: dump
+    source: log/
+    organize:
+      'ovn/*.log': log/ovn/
+      'openvswitch/*.log': log/openvswitch/
+
+slots:
+  ovn-logs:
+    interface: content
+    source:
+      read:
+        - $SNAP/log/ovn
+  ovs-logs:
+    interface: content
+    source:
+      read:
+        - $SNAP/log/openvswitch 
